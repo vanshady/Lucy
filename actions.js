@@ -2,15 +2,12 @@ var data;
 var timer;
 var synth = window.speechSynthesis;
 var utterThis = new SpeechSynthesisUtterance("Sorry, I don't understand that request.");
-// var speech_voices;
-// voices = synth.getVoices();
-// speech.voice = voices.filter(function(voice) { return voice.name == 'Google UK English Female'; })[0];
 
 chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
+  function (request, sender, sendResponse) {
     console.log(request.data);
     data = request.data;
-    sendResponse({type: "test"});
+    sendResponse({ type: "test" });
     selectIntent(request.data);
   }
 );
@@ -18,38 +15,38 @@ chrome.runtime.onMessage.addListener(
 // for every action, excute some javascript
 var intents = ["scroll_up", "scroll_down", "stop", "new_tab", "go_back", "go_forward", "click_link", "close_tab", "navigate", "look_up"];
 
-var scrollUp = function() {
+var scrollUp = function () {
   stop();
   console.log("I'm trying to scroll up");
-  timer = setInterval(function() {window.scrollBy(0, -1)}, 8);
+  timer = setInterval(function () { window.scrollBy(0, -1) }, 8);
 };
 
-var scrollDown = function() {
+var scrollDown = function () {
   stop();
   console.log("I'm trying to scroll down");
-  timer = setInterval(function() {window.scrollBy(0, 1)}, 8);
+  timer = setInterval(function () { window.scrollBy(0, 1) }, 8);
 };
 
-var stop = function() {
+var stop = function () {
   clearInterval(timer);
 }
 
-var newTab = function() {
-	console.log("I'm trying to scroll new tab");
+var newTab = function () {
+  console.log("I'm trying to scroll new tab");
   openinnewtab("http://www.google.com");
 };
 
-var goBack = function() {
-	console.log("I'm trying to go back");
+var goBack = function () {
+  console.log("I'm trying to go back");
   window.history.back();
 };
 
-var goForward = function() {
-	console.log("I'm trying to go forward");
+var goForward = function () {
+  console.log("I'm trying to go forward");
   window.history.forward();
 };
 
-var clickLink = function() {
+var clickLink = function () {
   console.log("I'm trying to click link");
   var query = "";
   if (data.result.resolvedQuery.indexOf(" about ") != -1) {
@@ -71,12 +68,12 @@ var clickLink = function() {
   }
 };
 
-var closeTab = function() {
+var closeTab = function () {
   console.log("I'm trying to close tab");
   window.close();
 };
 
-var navigate = function() {
+var navigate = function () {
   console.log("I'm trying to navigate to a site")
   console.log(data);
   if (data.result.parameters.url.length > 0) {
@@ -87,7 +84,7 @@ var navigate = function() {
   }
 };
 
-var lookUp = function() {
+var lookUp = function () {
   console.log("trying to look up");
   for (var term in data.result.parameters) {
     if (data.result.parameters[term].length > 0) {

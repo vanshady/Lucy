@@ -8,22 +8,20 @@
   "permissions": ["tabs", "identity", "webNavigation", "bookmarks", "downloads", "sessions"],
 
   "background": {
-    "background_page": ["background.html"],
-    "scripts": ["jquery-1.9.1.min.js", "background.js"]
+    "page": "background.html",
+    "persistent": true
   },
 
   "browser_action": {
-    "default_icon": "icon.png"
-    },
-
-  "options_page": "initialize.html",
-
+    "default_icon": "icon.png",
+    "default_title": "browser action",
+    "default_popup": "browser_action.html"
+  },
   "content_scripts": [
   {
     "matches": ["http://*/*", "https://*/*"],
-    "js": ["jquery-1.9.1.min.js", "actions.js", "parse.js"]
+    "js": ["jquery-1.9.1.min.js", "firebase.js" ,"actions.js", "parse.js"]
   }
   ],
-
-  "options_page": "initialize.html"
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'"
 }
