@@ -5,7 +5,7 @@ var utterThis = new SpeechSynthesisUtterance("Sorry, I don't understand that req
 
 chrome.runtime.onMessage.addListener(
   function (request, sender, sendResponse) {
-    console.log(request.data);
+    console.log("DATA: " + request.data);
     data = request.data;
     sendResponse({ type: "test" });
     selectIntent(request.data);
@@ -115,9 +115,9 @@ var functions = [scrollUp, scrollDown, stop, newTab, goBack, goForward, clickLin
 
 function selectIntent(data) {
   var foundFunction = false;
-  console.log(data.result.action);
+  console.log(data);
   for (var i = 0; i < intents.length; i++) {
-    if (data.result.action == intents[i]) {
+    if (data == intents[i]) {
       foundFunction = true;
       functions[i]();
     }
