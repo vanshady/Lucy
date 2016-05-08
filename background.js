@@ -8,6 +8,7 @@ f.on('value', function (s) {
       if (response.type == "test") {
         console.log('test received');
       }
+      f.set({"command": "set"});
     });
   });
 });
